@@ -1,0 +1,6 @@
+[submodule "libs/luajit"]
+	path = libs/luajit
+	url = https://github.com/9chu/LuaJIT-cmake
+[submodule "libs/sol2"]
+	path = libs/sol2
+	url = https://github.com/ThePhD/sol2
