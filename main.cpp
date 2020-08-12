@@ -6,7 +6,7 @@
 
 #include "out.h"
 
-
+void load_replxx(sol::state& lua);
 
 int main(int argc, const char* argv[])
 {
@@ -17,6 +17,8 @@ int main(int argc, const char* argv[])
 		sol::lib::os, sol::lib::ffi
 	);
 	
+	load_replxx(lua);
+
 	int x = 0;
 	lua.set_function("beep", [&x]{ ++x; });
 

@@ -1,2 +1,2 @@
 language = "polygott"
-run = "sh ./go.sh"
+run = "bash ./go.sh"

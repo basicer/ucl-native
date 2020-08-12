@@ -1,4 +1,7 @@
 #!/bin/sh
+set -e 
+set -o pipefail
+
 git submodule init
 git submodule update
 if [ ! -d build ]; then

@@ -11,7 +11,9 @@ endif()
 
 add_subdirectory(libs/luajit)
 add_subdirectory(libs/sol2)
+add_subdirectory(libs/replxx)
 
+file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 add_custom_command(
     OUTPUT  out.h
@@ -20,9 +22,9 @@ add_custom_command(
 )
 
 
-add_executable(ucl main.cpp ${CMAKE_CURRENT_BINARY_DIR}/out.h)
-target_link_libraries(ucl PRIVATE liblua-static sol2)
-target_include_directories(ucl PRIVATE liblua-static sol2 ${CMAKE_CURRENT_BINARY_DIR})
+add_executable(ucl ${SOURCES} ${CMAKE_CURRENT_BINARY_DIR}/out.h)
+target_link_libraries(ucl PRIVATE liblua-static sol2 replxx)
+target_include_directories(ucl PRIVATE liblua-static sol2 ${CMAKE_CURRENT_BINARY_DIR} replxx)
 
 
 
