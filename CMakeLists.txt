@@ -14,11 +14,19 @@ add_subdirectory(libs/sol2)
 add_subdirectory(libs/replxx)
 
 file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB UCL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/libs/ucl/**.lua)
+
+add_custom_command(
+    OUTPUT  out.lua
+    COMMAND ${CMAKE_COMMAND} -E env LUA_PATH=${CMAKE_CURRENT_SOURCE_DIR}/libs/luajit/src/?.lua $<TARGET_FILE:lua> ${CMAKE_CURRENT_SOURCE_DIR}/libs/ucl/pack.lua ${CMAKE_CURRENT_BINARY_DIR}/out.lua
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/libs/ucl
+    DEPENDS $<TARGET_FILE:lua> ${UCL_SOURCES}
+)
 
 add_custom_command(
     OUTPUT  out.h
-    COMMAND ${CMAKE_COMMAND} -E env LUA_PATH=${CMAKE_CURRENT_SOURCE_DIR}/libs/luajit/src/?.lua $<TARGET_FILE:lua> -b -g -t h -n out ${CMAKE_CURRENT_SOURCE_DIR}/main.lua ${CMAKE_CURRENT_BINARY_DIR}/out.h
-    DEPENDS $<TARGET_FILE:lua> main.lua
+    COMMAND ${CMAKE_COMMAND} -E env LUA_PATH=${CMAKE_CURRENT_SOURCE_DIR}/libs/luajit/src/?.lua $<TARGET_FILE:lua> -b -g -t h -n out ${CMAKE_CURRENT_BINARY_DIR}/out.lua ${CMAKE_CURRENT_BINARY_DIR}/out.h
+    DEPENDS $<TARGET_FILE:lua> out.lua
 )
 
 

@@ -7,3 +7,6 @@
 [submodule "libs/replxx"]
 	path = libs/replxx
 	url = https://github.com/AmokHuginnsson/replxx
+[submodule "libs/ucl"]
+	path = libs/ucl
+	url = https://github.com/basicer/ucl
